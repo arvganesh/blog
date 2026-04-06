@@ -1,5 +1,5 @@
 ---
-title: "Notes on Natural Emergent Misalignment from Reward Hacking in Production RL"
+title: "Natural Emergent Misalignment from Reward Hacking in Production RL"
 pubDate: 2026-04-02
 category: "Notes"
 ---
