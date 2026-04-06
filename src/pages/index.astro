@@ -6,11 +6,44 @@ import { themeConfig } from '@/config'
 import { getSortedFilteredPosts } from '@/utils/draft'
 
 const posts = await getSortedFilteredPosts()
+
+const categories = ['Notes', 'Essays'] as const
+const grouped = categories
+  .map((cat) => ({
+    name: cat,
+    posts: posts.filter((p) => p.data.category === cat)
+  }))
+  .filter((g) => g.posts.length > 0)
+
+const uncategorized = posts.filter((p) => !p.data.category)
 ---
 
 <IndexLayout title={themeConfig.site.title} description={themeConfig.site.description}>
   <About />
   <main>
-    <PostList posts={posts} />
+    {grouped.map((group) => (
+      <section>
+        <h2 class="category-heading">{group.name}</h2>
+        <PostList posts={group.posts} />
+      </section>
+    ))}
+    {uncategorized.length > 0 && (
+      <section>
+        <PostList posts={uncategorized} />
+      </section>
+    )}
   </main>
 </IndexLayout>
+
+<style>
+  .category-heading {
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-secondary);
+    margin: 2rem 0 0.5rem 0;
+  }
+
+  .category-heading:first-child {
+    margin-top: 0;
+  }
+</style>

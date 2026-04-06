@@ -1,6 +1,7 @@
 ---
 title: "Notes on Natural Emergent Misalignment from Reward Hacking in Production RL"
 pubDate: 2026-04-02
+category: "Notes"
 ---
 
 I wanted to share my notes on [Notes on Natural Emergent Misalignment from Reward Hacking in Production RL](https://www.anthropic.com/research/emergent-misalignment-reward-hacking).

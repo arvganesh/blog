@@ -557,6 +557,15 @@
   }
 }
 
+/* Category */
+.prose .date .category {
+  color: var(--text-secondary);
+}
+
+.prose .date > .separator {
+  margin: 0 0.25em;
+}
+
 /* Reading Time */
 .reading-time {
   color: var(--text-secondary);
