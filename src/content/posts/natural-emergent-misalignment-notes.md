@@ -12,7 +12,7 @@ I wanted to share my notes on [Notes on Natural Emergent Misalignment from Rewar
 - RL in coding environments susceptible to the reward hacking approaches fine-tuned on during SDF.
 - Evaluated misalignment on held-out tasks. 
 
-## Some Results I Found Interesting
+## Interesting Results
 - "(At the exact point the model begins to reward hack, [they saw] a sharp increase in all our misalignment evaluations."
 - After learning to reward hack, the model attempted to sabotage the research project's codebase in ways that would make it harder to detect misalignment (12% of the time vs. 0% in baseline).
 - Alignment faking found 50% of the time.
