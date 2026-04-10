@@ -12,7 +12,9 @@ const posts = defineCollection({
       // Transform string to Date object
       pubDate: z.coerce.date(),
       image: z.string().optional(),
-      category: z.enum(['Notes', 'Essays']).optional()
+      category: z.enum(['Notes', 'Essays']).optional(),
+      externalUrl: z.string().url().optional(),
+      pinned: z.boolean().optional()
     })
 })
 

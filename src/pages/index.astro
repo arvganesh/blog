@@ -5,7 +5,10 @@ import PostList from '@/components/widgets/PostList.astro'
 import { themeConfig } from '@/config'
 import { getSortedFilteredPosts } from '@/utils/draft'
 
-const posts = await getSortedFilteredPosts()
+const allPosts = await getSortedFilteredPosts()
+
+const pinned = allPosts.filter((p) => p.data.pinned)
+const posts = allPosts.filter((p) => !p.data.pinned)
 
 const categories = ['Notes', 'Essays'] as const
 const grouped = categories
@@ -21,6 +24,12 @@ const uncategorized = posts.filter((p) => !p.data.category)
 <IndexLayout title={themeConfig.site.title} description={themeConfig.site.description}>
   <About />
   <main>
+    {pinned.length > 0 && (
+      <section>
+        <h2 class="category-heading">Pinned</h2>
+        <PostList posts={pinned} />
+      </section>
+    )}
     {grouped.map((group) => (
       <section>
         <h2 class="category-heading">{group.name}</h2>

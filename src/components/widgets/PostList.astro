@@ -8,28 +8,38 @@ const { posts } = Astro.props as PostListProps
 
 <ul>
   {
-    posts.map((post) => (
-      <li>
-        <a href={`/${post.id}/`}>
-          <div class={`post-item ${!themeConfig.date.dateOnRight ? 'date-left' : ''}`}>
-            {!themeConfig.date.dateOnRight && (
-              <p class="date font-features">
-                <FormattedDate date={post.data.pubDate} context="list" />
+    posts.map((post) => {
+      const isExternal = !!post.data.externalUrl
+      const href = isExternal ? post.data.externalUrl! : `/${post.id}/`
+      return (
+        <li>
+          <a
+            href={href}
+            {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
+            <div class={`post-item ${!themeConfig.date.dateOnRight ? 'date-left' : ''}`}>
+              {!themeConfig.date.dateOnRight && (
+                <p class="date font-features">
+                  <FormattedDate date={post.data.pubDate} context="list" />
+                </p>
+              )}
+              <p class="title">
+                {post.data.title}
+                {isExternal && <span class="external-icon" aria-hidden="true"> ↗</span>}
               </p>
-            )}
-            <p class="title">{post.data.title}</p>
-            {themeConfig.date.dateOnRight && (
-              <div class={themeConfig.general.postListDottedDivider ? 'dotted-divider' : 'divider'} />
-            )}
-            {themeConfig.date.dateOnRight && (
-              <p class="date font-features">
-                <FormattedDate date={post.data.pubDate} context="list" />
-              </p>
-            )}
-          </div>
-        </a>
-      </li>
-    ))
+              {themeConfig.date.dateOnRight && (
+                <div class={themeConfig.general.postListDottedDivider ? 'dotted-divider' : 'divider'} />
+              )}
+              {themeConfig.date.dateOnRight && (
+                <p class="date font-features">
+                  <FormattedDate date={post.data.pubDate} context="list" />
+                </p>
+              )}
+            </div>
+          </a>
+        </li>
+      )
+    })
   }
 </ul>
 <div class="placeholder"></div>
@@ -101,6 +111,12 @@ const { posts } = Astro.props as PostListProps
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .external-icon {
+    color: var(--text-tertiary);
+    font-size: 0.85em;
+    margin-left: 0.15em;
   }
 
   .date {
